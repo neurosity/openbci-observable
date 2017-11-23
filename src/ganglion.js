@@ -1,6 +1,6 @@
 
 const Ganglion = require('openbci-ganglion');
-const BCIObservable = require('./BCIObservable');
+const BCIObservable = require('./observable');
 
 module.exports = class GanglionRx extends Ganglion {
 

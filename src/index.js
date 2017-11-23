@@ -1,6 +1,6 @@
 
-const CytonRx = require('./classes/CytonRx');
-const GanglionRx = require('./classes/GanglionRx');
+const CytonRx = require('./cyton');
+const GanglionRx = require('./ganglion');
 
 const getProxy = proxy => new Proxy(proxy, {
     apply(target, context, args) {

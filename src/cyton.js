@@ -1,7 +1,7 @@
 
 const { Cyton, OpenBCIConstants } = require('openbci');
 const { OBCISimulatorPortName } = require('openbci-utilities');
-const BCIObservable = require('./BCIObservable');
+const BCIObservable = require('./observable');
 
 module.exports = class CytonRx extends Cyton {
     
