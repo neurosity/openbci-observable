@@ -1,16 +1,6 @@
 
-const CytonRx = require('./cyton');
-const GanglionRx = require('./ganglion');
-
-const getProxy = proxy => new Proxy(proxy, {
-    apply(target, context, args) {
-        return new target(...args)
-            .toObservable();
-    }
-});
-
-const Cyton = getProxy(CytonRx);
-const Ganglion = getProxy(GanglionRx);
+const Cyton = require('./cyton');
+const Ganglion = require('./ganglion');
 
 module.exports = {
     Cyton,

@@ -1,12 +1,18 @@
 
-const BrainObservable = require('../src/index').Cyton;
+const { Cyton } = require('../src/index');
 
-const options = {
-    verbose: true,
-    simulate: true
-};
+async function init () {
+    const cyton = new Cyton({
+        verbose: true,
+        simulate: true
+    });
 
-const brainwaves = BrainObservable(options)
-    .subscribe(sample =>
+    await cyton.connect();
+    await cyton.start();
+
+    cyton.stream.subscribe(sample =>
         console.log('sample', sample)
     );
+}
+
+init();

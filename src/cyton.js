@@ -1,38 +1,29 @@
 
-const { Cyton, OpenBCIConstants } = require('openbci');
+const { Cyton } = require('openbci');
 const { OBCISimulatorPortName } = require('openbci-utilities');
-const BCIObservable = require('./observable');
+const { fromEvent } = require('rxjs/observable/fromEvent');
 
-module.exports = class CytonRx extends Cyton {
+class CytonObservable extends Cyton {
     
     constructor (...options) {
-        super(...options); 
-        this.start();
+        super(...options);
+        this.stream = fromEvent(this, 'sample');
+        this.init();
     }
 
     async start () {
-        try {
-            const portName = await this.autoFindOpenBCIBoard();
-            await this.stream(portName);
-        } catch (error) {
-            await this.stream(OBCISimulatorPortName);
-        }
-    }
-
-    async stream (portName) {
-        await this.connect(portName);
         this.on('ready', async () => {
             await this.streamStart();
         });
     }
 
-    toObservable () {
-        return BCIObservable
-            .create(subscriber => {
-                const streamSample = sample =>
-                    subscriber.next(sample);
-
-                this.on('sample', streamSample);
-            });
+    async init () {
+        try {
+            this._portName = await this.autoFindOpenBCIBoard();
+        } catch (error) {
+            this._portName = OBCISimulatorPortName;
+        }
     }
 }
+
+module.exports = CytonObservable;

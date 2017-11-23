@@ -1,37 +1,27 @@
 
 const Ganglion = require('openbci-ganglion');
-const BCIObservable = require('./observable');
+const { fromEvent } = require('rxjs/observable/fromEvent');
 
-module.exports = class GanglionRx extends Ganglion {
+class GanglionObservable extends Ganglion {
 
     constructor (...options) {
-        super(...options); 
-        this.start();
-    }
-
-    start () {
-        this.searchStart();
-
-        this.once('ganglionFound', (peripheral) => {
-            this.searchStop();
-            this.stream(peripheral);
-        });
-    }
-
-    stream (peripheral) {
-        this.connect(peripheral);
-        this.once('ready', () => {
-            this.streamStart();
-        });
-    }
-
-    toObservable () {
-        return BCIObservable
-            .create(subscriber => {
-                const streamSample = sample =>
-                    subscriber.next(sample);
-
-                this.on('sample', streamSample);
+        super(...options);
+        this.stream = fromEvent(this, 'sample');
+        this._connect = this.connect;
+        this.connect = async () => {
+            this.searchStart();
+            this.once('ganglionFound', peripheral => {
+                this.searchStop();
+                this._connect(peripheral);
             });
+        };
+    }
+
+    async start () {
+        this.once('ready', async () => {
+            await this.streamStart();
+        });
     }
 }
+
+module.exports = GanglionObservable;

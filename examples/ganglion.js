@@ -1,12 +1,18 @@
 
-const BrainObservable = require('../src/index').Ganglion;
+const { Ganglion } = require('../src/index');
 
-const options = {
-    verbose: true,
-    //simulate: true // Not yet supported
-};
+async function init () {
+    const ganglion = new Ganglion({
+        verbose: true,
+        simulate: true
+    });
 
-const brainwaves = BrainObservable(options)
-    .subscribe(sample =>
+    await ganglion.connect();
+    await ganglion.start();
+
+    ganglion.stream.subscribe(sample =>
         console.log('sample', sample)
     );
+}
+
+init();

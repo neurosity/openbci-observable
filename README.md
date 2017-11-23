@@ -31,18 +31,24 @@ const BrainObservable  = require('openbci-rx').Ganglion;
 Basic usage
 
 ``` js
-const BrainObservable = require('openbci-rx').Cyton;
+const { Cyton } = require('openbci-rx');
 
-// Same options accepted by 'openbci'
-const options = {
-    verbose: true,
-    simulate: true
-};
+async function init () {
+    // Same options accepted by 'openbci'
+    const cyton = new Cyton({
+        verbose: true,
+        simulate: true
+    });
 
-const brainwaves = BrainObservable(options)
-    .subscribe(sample =>
-        console.log(sample)
+    await cyton.connect();
+    await cyton.start();
+
+    cyton.stream.subscribe(sample =>
+        console.log('sample', sample)
     );
+}
+
+init();
 ```
 
 #### Adding operators
@@ -55,14 +61,13 @@ project. Now these can be used as "lettable" RxJS operators. **
 // npm install --save eeg-pipes
 import { voltsToMicrovolts, bufferFFT, alphaRange } from 'eeg-pipes';
 
-const brainwaves = BrainObservable(options)
-    .pipe(
-        voltsToMicrovolts(),
-        bufferFFT({ bins: 256 })
-        alphaRange()
-    ).subscribe(buffer =>
-        console.log(buffer)
-    );
+cyton.stream.pipe(
+    voltsToMicrovolts(),
+    bufferFFT({ bins: 256 })
+    alphaRange()
+).subscribe(buffer =>
+    console.log(buffer)
+);
 ```
 
 And now we have an FFT buffer of Alpha waves!
