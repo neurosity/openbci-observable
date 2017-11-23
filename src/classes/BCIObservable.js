@@ -1,6 +1,5 @@
 
 const { Observable } = require('rxjs/Rx');
-const operators = require('../operators');
 
 class BCIObservable extends Observable {
     lift (operator) {
@@ -10,11 +9,5 @@ class BCIObservable extends Observable {
         return observable;
     }
 }
-
-operators.forEach(operator => {
-    Object.assign(Observable.prototype, {
-        [operator.name]: operator
-    });
-});
 
 module.exports = BCIObservable;

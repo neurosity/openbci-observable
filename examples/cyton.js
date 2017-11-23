@@ -6,7 +6,7 @@ const options = {
     simulate: true
 };
 
-const brainwaves$ = BrainObservable(options)
+const brainwaves = BrainObservable(options)
     .subscribe(sample =>
         console.log('sample', sample)
     );
