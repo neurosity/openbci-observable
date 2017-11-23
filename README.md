@@ -31,12 +31,7 @@ Basic usage
 const { Cyton } = require('openbci-observable');
 
 async function init () {
-    // Same options accepted by 'openbci'
-    const cyton = new Cyton({
-        verbose: true,
-        simulate: true
-    });
-
+    const cyton = new Cyton();
     await cyton.connect();
     await cyton.start();
 
