@@ -1,9 +1,6 @@
-# OpenBCI Rx
+# OpenBCI Observable
 
-Reactive Extensions for OpenBCI in Node
-
-#### Dependencies Prerequisites
-> Make sure you have **Node version >= 7.8** installed for development purpose.
+Reactive OpenBCI for Node
 
 #### Getting started
 
@@ -15,15 +12,15 @@ This library works with the following OpenBCI hardware:
 Get started by importing the module:
 
 ``` bash
-npm install --save openbci-rx
+npm install --save openbci-observable
 ```
 
 ``` js
-const { Cyton, Ganglion } = require('openbci-rx');
+const { Cyton, Ganglion } = require('openbci-observable');
 
 // Or with an alias...
 
-const BrainObservable  = require('openbci-rx').Ganglion;
+const BrainObservable  = require('openbci-observable').Ganglion;
 ```
 
 #### Examples
@@ -31,7 +28,7 @@ const BrainObservable  = require('openbci-rx').Ganglion;
 Basic usage
 
 ``` js
-const { Cyton } = require('openbci-rx');
+const { Cyton } = require('openbci-observable');
 
 async function init () {
     // Same options accepted by 'openbci'
@@ -71,6 +68,9 @@ cyton.stream.pipe(
 ```
 
 And now we have an FFT buffer of Alpha waves!
+
+#### Dependencies Prerequisites
+> Make sure you have **Node version >= 7.8** installed for development purpose.
 
 ### License
 MIT © [Alex Castillo](https://github.com/alexcastillo)

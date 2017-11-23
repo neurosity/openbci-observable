@@ -1,6 +1,6 @@
 {
-  "name": "openbci-rx",
-  "description": "Reactive Extensions for OpenBCI in Node",
+  "name": "openbci-observable",
+  "description": "Reactive OpenBCI for Node",
   "main": "src/index.js",
   "version": "1.0.1",
   "scripts": {
@@ -18,10 +18,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:alexcastillo/openbci-rx.git"
+    "url": "git@github.com:alexcastillo/openbci-observable.git"
   },
   "bugs": {
-    "url": "https://github.com/alexcastillo/openbci-rx/issues"
+    "url": "https://github.com/alexcastillo/openbci-observable/issues"
   },
   "dependencies": {
     "openbci": "^2.2.0",
