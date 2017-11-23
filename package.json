@@ -2,7 +2,7 @@
   "name": "openbci-rx",
   "description": "Reactive Extensions for OpenBCI in Node",
   "main": "src/index.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "start": "node ./examples/cyton"
   },
