@@ -1,10 +1,10 @@
 {
   "name": "openbci-rx",
-  "description": "Reactive Extensions for OpenBCI",
+  "description": "Reactive Extensions for OpenBCI in Node",
   "main": "src/index.js",
   "version": "0.1.1",
   "scripts": {
-    "start": "node ./examples/basic"
+    "start": "node ./examples/cyton"
   },
   "author": "Alex Castillo <alex@castillo.io>",
   "license": "MIT",
@@ -18,18 +18,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:NeuroJS/openbci-rx.git"
+    "url": "git@github.com:alexcastillo/openbci-rx.git"
   },
   "bugs": {
-    "url": "https://github.com/NeuroJS/openbci-rx/issues"
+    "url": "https://github.com/alexcastillo/openbci-rx/issues"
   },
   "dependencies": {
-    "dsp.js": "github:neurojs/dsp.js",
-    "fili": "^2.0.0",
-    "lodash": "^4.17.4",
-    "openbci": "^1.5.1",
-    "openbci-ganglion": "^0.4.3",
-    "rxjs": "^5.3.0"
+    "openbci": "^2.2.0",
+    "openbci-ganglion": "^1.0.0",
+    "rxjs": "^5.5.2"
   },
   "devDependencies": {},
   "engines": {
