@@ -5,8 +5,8 @@ const BCIObservable = require('./BCIObservable');
 
 module.exports = class CytonRx extends OpenBCIBoard {
     
-    constructor (options) {
-        super(options); 
+    constructor (...options) {
+        super(...options); 
         this.start();
     }
 
