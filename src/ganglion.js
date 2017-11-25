@@ -1,12 +1,16 @@
 
 const Ganglion = require('openbci-ganglion');
 const { fromEvent } = require('rxjs/observable/fromEvent');
+const { map } = require('rxjs/operators/map');
+
+const { renameDataProp } = require('./utils');
 
 class GanglionObservable extends Ganglion {
 
     constructor (...options) {
         super(...options);
-        this.stream = fromEvent(this, 'sample');
+        this.stream = fromEvent(this, 'sample')
+            .pipe(map(renameDataProp));
         this._connect = this.connect;
         this.connect = async () => {
             this.searchStart();
