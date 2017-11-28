@@ -4,7 +4,7 @@ const { OBCISimulatorPortName } = require('openbci-utilities');
 const { fromEvent } = require('rxjs/observable/fromEvent');
 const { map } = require('rxjs/operators/map');
 
-const { renameDataProp } = require('./utils');
+const { renameDataProp, onExit } = require('./utils');
 
 class CytonObservable extends Cyton {
     
@@ -13,11 +13,14 @@ class CytonObservable extends Cyton {
         this.stream = fromEvent(this, 'sample')
             .pipe(map(renameDataProp));
         this.init();
+        onExit(this);
     }
 
     async start () {
         this.on('ready', async () => {
-            await this.streamStart();
+            try {
+                await this.streamStart();
+            } catch (e) {}
         });
     }
 

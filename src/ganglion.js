@@ -3,7 +3,7 @@ const Ganglion = require('openbci-ganglion');
 const { fromEvent } = require('rxjs/observable/fromEvent');
 const { map } = require('rxjs/operators/map');
 
-const { renameDataProp } = require('./utils');
+const { renameDataProp, onExit } = require('./utils');
 
 class GanglionObservable extends Ganglion {
 
@@ -19,11 +19,14 @@ class GanglionObservable extends Ganglion {
                 this._connect(peripheral);
             });
         };
+        onExit(this);
     }
 
     async start () {
         this.once('ready', async () => {
-            await this.streamStart();
+            try {
+                await this.streamStart();
+            } catch (e) {}
         });
     }
 }

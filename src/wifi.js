@@ -3,13 +3,7 @@ const Wifi = require('openbci-wifi');
 const { fromEvent } = require('rxjs/observable/fromEvent');
 const { map } = require('rxjs/operators/map');
 
-const { renameDataProp } = require('./utils');
-
-const exitEvents = {
-    exit: true,
-    SIGINT: false,
-    uncaughtException: false
-};
+const { renameDataProp, onExit } = require('./utils');
 
 class WifiObservable extends Wifi {
     
@@ -24,27 +18,13 @@ class WifiObservable extends Wifi {
                 await this.internalConnect(o);
             } catch (e) {}
         };
-
-        exitEvents.forEach(eventName => {
-            process.on(eventName, this.exit.bind(this));
-        });
+        onExit(this);
     }
 
     async start () {
         try {
             await this.streamStart();
         } catch (e) {}
-    }
-
-    async exit (cleanUp) {
-        this.removeAllListeners('rawDataPacket');
-        this.removeAllListeners('sample');    
-
-            return;
-        }
-
-        await this.disconnect();
-        process.exit(0);
     }
 }
 
