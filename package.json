@@ -26,6 +26,8 @@
   "dependencies": {
     "openbci": "^2.2.0",
     "openbci-ganglion": "^1.0.0",
+    "openbci-utilities": "^0.3.2",
+    "openbci-wifi": "^0.3.1",
     "rxjs": "^5.5.2"
   },
   "devDependencies": {},
