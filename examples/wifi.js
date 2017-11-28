@@ -6,7 +6,7 @@ async function init () {
         verbose: true
     });
 
-    await wifi.connect({ ipAddress: '192.168.4.1' });
+    await wifi.connect({ ipAddress: 'xx.xx.xx.xx' });
     await wifi.start();
 
     wifi.stream.subscribe(sample =>
