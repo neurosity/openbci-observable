@@ -5,7 +5,11 @@ const { map } = require('rxjs/operators/map');
 
 const { renameDataProp } = require('./utils');
 
-const exitEvents = ['exit', 'SIGINT', 'uncaughtException'];
+const exitEvents = {
+    exit: true,
+    SIGINT: false,
+    uncaughtException: false
+};
 
 class WifiObservable extends Wifi {
     
@@ -32,14 +36,13 @@ class WifiObservable extends Wifi {
         } catch (e) {}
     }
 
-    async exit () {
-        if (!this.isConnected()) {
+    async exit (cleanUp) {
+        this.removeAllListeners('rawDataPacket');
+        this.removeAllListeners('sample');    
+
             return;
         }
 
-        this.streamStop();
-        this.removeAllListeners('rawDataPacket');
-        this.removeAllListeners('sample');    
         await this.disconnect();
         process.exit(0);
     }
