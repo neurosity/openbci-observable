@@ -2,7 +2,7 @@
   "name": "openbci-observable",
   "description": "Reactive OpenBCI for Node",
   "main": "src/index.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "start": "node ./examples/cyton"
   },
