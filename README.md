@@ -10,7 +10,7 @@ This library works with the following OpenBCI hardware:
 * [Ganglion](https://github.com/OpenBCI/OpenBCI_NodeJS_Ganglion)
 * [WifiShield](https://github.com/OpenBCI/OpenBCI_NodeJS_Wifi)
 
-Get started by importing the module:
+Get started by importing the library:
 
 ``` bash
 npm install --save openbci-observable
